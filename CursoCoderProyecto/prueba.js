@@ -1,1 +1,0 @@
-function alerta1() { alert("hol"); }
