@@ -1,5 +1,5 @@
-let carrito = [];
-let precioTotal = 0;
+var carrito = [];
+var precioTotal = 0;
 
 
 function buyMiniature(){
@@ -41,6 +41,24 @@ function buyMiniature(){
                 ask = parseInt(prompt("Ingrese accion: Agregar use 1, restar ultimo objeto use 2, finalizar use 3"))
             }
         }
+     const names = carrito.map((el) => el.name + ": " + el.price)
+     document.getElementById("miniCart").innerHTML = names;
 
+}
+
+
+function newRequest(){
+    let name =document.forms["myForm"]["name"].value;
+    let tel =document.forms["myForm"]["tel"].value;
+    let email =document.forms["myForm"]["email"].value;
+    let request =document.forms["myForm"]["request"].value;
+    alert(name+tel+email+request)
+}
+function showCart(){
+    //let holder = [];
+    //for (let i = 0; i<carrito.length; i++){(holder.push(carrito[i].name))}
+    //alert("Su carrito tiene:\n " + holder.join(", "));
+    const names = carrito.map((el) => el.name + ": " + el.price)
+    alert("Su carrito: \n" + names.join("\n"));
 }
 

@@ -14,13 +14,24 @@
     <link rel="stylesheet" href="CSS/Styles.css">
     <script src="product.js"></script>
     <script src="functions.js"></script>
+    
 
 </head>
 
 <body>
       <header>
 
-        <h1 class="titulo">Maximo Aprile <span>Miniaturas</span> </h1>
+        <h1 class="titulo">Maximo Aprile <span>Miniaturas</span> 
+          <input
+          class="buttonCart" 
+          type="button"
+          id="cart"
+          value="Carrito"
+          onclick="showCart()">
+         
+        </h1>
+        <span id="miniCart" class="miniCart"></span>
+       
 
       </header>
 
@@ -38,7 +49,7 @@
       
       <main>
 
-        <h2>Mis servicio</h2>
+        <h2>Productos</h2>
         
         <section>
 
@@ -52,13 +63,14 @@
             <circle cx="16.5" cy="10.5" r=".5" fill="currentColor" />
           </svg>
 
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi ea quibusdam alias dolorem dicta totam officiis consequatur? Consequatur ducimus debitis, cumque animi cum aliquam provident iste ipsam, veritatis nam voluptate!</p>
+          <p>Convertimos tus ideas en realidad! Fabricamos miniaturas a pedido, dejanos el tuyo y nos contactaremos para realizarlas</p>
           <input 
           type="button"
           id="alerta"
           value="Comprar"
           onclick="buyMiniature()">
           
+        
 
         
         </section>
@@ -112,41 +124,18 @@
 
         <h2>Contacto</h2>
 
-        <form>
+        <form name="myForm" onsubmit="return newRequest()" >
 
-          <fieldset>
+          Name: <input type="text" name="name" placeholder="Name">
 
-            <legend>Contactanos llenando todos los campos</legend>
-            
-            <div>
+          Tel: <input type="tel" name="tel" placeholder="Tel">
 
-            <label>Nombre</label>
-            <input type="text" placeholder="Nombre">
+          Email: <input type="email" name="email" placeholder="Email">
 
-            </div>
+          Request <input type="text" name="request" placeholder="Request">
 
-            <div>
-            <label>Telefono</label>
-            <input type="tel" placeholder="Telefono">
-            </div>
-
-            <div>
-            <label>Correo</label>
-            <input type="email" placeholder="Email">
-            </div>
-
-            <div>
-            <label>Mensaje</label>
-            <textarea></textarea>
-            </div>
-
-            <input type="submit" value="Enviar"></imput>
-
-          </fieldset>
-
-        
-          
-        </form>
+          <input type="submit" value="Submit">
+          </form>
 
       </section>
     
