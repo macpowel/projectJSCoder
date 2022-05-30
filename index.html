@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="CSS/Styles.css">
     <script src="product.js"></script>
     <script src="functions.js"></script>
+   
     
 
 </head>
@@ -25,15 +26,15 @@
           <input
           class="buttonCart" 
           type="button"
-          id="cart"
-          value="Carrito"
-          onclick="showCart()">
+          id="buttonCart"
+          value="Cart"
+          >
           <input
           class="buttonCart" 
           type="button"
-          id="car"
+          id="buttonFilter"
           value="Filter"
-          onclick="showSelected()">
+         >
         
          
         </h1>
@@ -58,7 +59,7 @@
 
         <h2>Productos</h2>
         
-        <section>
+        <section id="sectionMini">
 
           <h3>Miniaturas</h3>
 
@@ -71,18 +72,21 @@
           </svg>
 
           <p>Convertimos tus ideas en realidad! Fabricamos miniaturas a pedido, dejanos el tuyo y nos contactaremos para realizarlas</p>
+
           <input 
           type="button"
-          id="alerta"
+          id="buttonMini"
           value="Comprar"
-          onclick="buyMiniature()">
+          >  
+
+          <p id = "counterMini"></p>
           
         
 
         
         </section>
 
-        <section>
+        <section id="sectionSet">
 
           <h3>Settings</h3>
 
@@ -106,9 +110,14 @@
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat dolore nemo ullam, distinctio possimus, iste dicta veniam exercitationem dolor quos recusandae. Magnam dolores dolor deleniti molestiae quibusdam earum alias beatae.</p>
           <input 
           type="button"
-          id="alerta"
-          value="Comprar"
-          onclick="buySetting()">
+          id="buttonSetting"
+          value="Comprar">
+      
+
+
+          <p id = "counterSetting"></p>
+
+
         </section>
 
         <section>
@@ -135,7 +144,7 @@
 
         <h2>Contacto</h2>
 
-        <form name="myForm" onsubmit="return newRequest()" >
+        <form name="myForm" id="form"  >
 
           Name: <input type="text" name="name" placeholder="Name">
 
@@ -145,7 +154,13 @@
 
           Request <input type="text" name="request" placeholder="Request">
 
-          <input type="submit" value="submit">
+          <input type="button" value="submit" id="dddd">
+
+          <script>let buttoncito = document.getElementById("dddd")
+          buttoncito.addEventListener("click", newRequest)
+
+          </script>
+          
           </form>
 
       </section>
@@ -164,7 +179,10 @@
 
   
 
-  
+      <script src="product.js"></script>
+      <script src="functions.js"></script>
+      <script src="buttons.js"></script>
+      
 
 </body>
 </html>

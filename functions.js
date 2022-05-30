@@ -1,6 +1,5 @@
-var carrito = [];
+carrito = [];
 var precioTotal = 0;
-
 
 function buyMiniature(){
     
@@ -44,6 +43,10 @@ function buyMiniature(){
      const names = carrito.map((el) => el.name + ": " + el.price)
      document.getElementById("miniCart").innerHTML = names;
 
+     showList(1);
+
+    
+     
 }
 
 function buySetting(){
@@ -85,20 +88,33 @@ function buySetting(){
                 ask = parseInt(prompt("Ingrese accion: Agregar use 1, restar ultimo objeto use 2, finalizar use 3"))
             }
         }
+
      const names = carrito.map((el) => el.name + ": " + el.price)
      document.getElementById("miniCart").innerHTML = names;
+     
+     showList(2);
 
+     
 }
+
 function newRequest(){
-    //en construccion
+    
     let name = document.forms["myForm"]["name"].value;
     let tel = document.forms["myForm"]["tel"].value;
     let email = document.forms["myForm"]["email"].value;
     let reques = document.forms["myForm"]["request"].value
-    //let req = new request (name, tel, email, reques);
-    //carrito.push(req);
+    let req = new request (name, tel, email, reques);
+    carrito.push(req);
     alert(name+tel+email+reques);
+    const names = carrito.map((el) => el.name + ": " + el.price)
+    document.getElementById("miniCart").innerHTML = names;
+    document.forms["myForm"]["name"].value ="";
+    document.forms["myForm"]["tel"].value ="";
+    document.forms["myForm"]["email"].value ="";
+    document.forms["myForm"]["request"].value ="";
+    
 }
+
 function showCart(){
     //let holder = [];
     //for (let i = 0; i<carrito.length; i++){(holder.push(carrito[i].name))}
@@ -107,14 +123,84 @@ function showCart(){
 
     alert("Su carrito: \n" + names.join("\n"));
 }
+
 function showSelected(){
     let askType = prompt("Que tipo desea ver en su carrito?").toLowerCase();
     while (askType != "setting" && askType != "miniature"){
         alert("input erroneo, pruebe de nuevo");
-        let askType = prompt("Que tipo desea ver en su carrito?").toLowerCase()
+        askType = prompt("Que tipo desea ver en su carrito?").toLowerCase()
     }
     const type = carrito.filter((el) => el.constructor.name == askType)
     const car = type.map((el) => el.constructor.name + ": " + el.name + ": " + el.price)
     alert("Su carrito: \n" + car.join("\n"));
 }
 
+function showList(number){
+ 
+    switch(number){
+        case 1:
+
+            let counter = document.getElementById("counterMini")
+            let display = document.getElementById("sectionMini")
+            let num = 0;
+
+            carrito.forEach( (product)=> {
+                if (product.constructor.name == "miniature"){
+                    num++
+                    let legend = `Name: ${product.name} - Size: ${product.size} - Detail Level: ${product.detailLevel} - Price ${product.price} `
+                    let li = document.createElement("div")
+                    li.innerHTML = `<p class = "listMini">${legend}</p>`
+                    display.appendChild(li)
+                }
+                })
+            
+            
+            if (num >0){
+                counter.innerText = num + " in cart ";
+            }else{
+                counter.innerText = "";
+            }
+
+            break;
+
+        case 2:
+
+            let counterS = document.getElementById("counterSetting")
+            let displayS = document.getElementById("sectionSet")
+            let numS = 0;
+            carrito.forEach( (product)=> {
+                if (product.constructor.name == "setting"){
+                   numS++
+                   let legend = `Name: ${product.name} - Size: ${product.squares} - Detail Level: ${product.detailLevel} - Price ${product.price} `
+                    let li = document.createElement("div")
+                    li.innerHTML = `<p class = "listSet">${legend}</p>`
+                    displayS.appendChild(li)
+                  
+                }
+               })
+            
+            if (numS >0){
+               counterS.innerText = numS + " in cart ";
+            }else{
+               counterS.innerText = "";
+            }
+       
+             break;
+
+        }
+}
+
+function newMiniature{
+    let name = document.forms["myFormMini"]["name"].value;
+    let size = document.forms["myFormMini"]["size"].value;
+    let detailLevel = document.forms["myFormMini"]["detailLevel"].value;
+    
+    let Mini = new miniature (name, size, detailLevel);
+    carrito.push(mini);
+    alert(name + size + detailLevel);
+    const names = carrito.map((el) => el.name + ": " + el.price)
+    document.getElementById("miniCart").innerHTML = names;
+    document.forms["myFormMini"]["name"].value = "";
+    document.forms["myFormMini"]["size"].value = "";
+    document.forms["myFormMini"]["detailLevel"].value = "";
+}

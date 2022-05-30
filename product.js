@@ -48,5 +48,6 @@ class request{
         this.tel = tel;
         this.email = email;
         this.request = request;
+        this.price = "price to be seen";
     }
 }
