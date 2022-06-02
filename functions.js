@@ -2,6 +2,7 @@ carrito = [];
 var precioTotal = 0;
 
 function buyMiniature(){
+    //Paso a ser newMiniature por eventos
     
     let ask = parseInt(prompt("Ingrese accion: agregar miniatura use 1, quitar ultima miniatura use 2, finalizar use 3"))
         while (ask != 3){
@@ -20,7 +21,7 @@ function buyMiniature(){
                     askDetail = prompt("Que nivel de detalle desea? high or low??").toLowerCase();
                   
                 }
-                let mini = new miniature (askName, askDetail, askSize);
+                let mini = new Miniature (askName, askDetail, askSize);
                 mini.priceCalculator();
                 alert ("El precio seria" + mini.price)
                 carrito.push(mini);
@@ -68,7 +69,7 @@ function buySetting(){
                     askDetail = prompt("Que nivel de detalle desea? high or low??").toLowerCase();
                   
                 }
-                let set = new setting (askName, askDetail, askSquares);
+                let set = new Setting (askName, askDetail, askSquares);
                 set.priceCalculator();
                 alert ("El precio seria" + set.price)
                 carrito.push(set);
@@ -103,7 +104,7 @@ function newRequest(){
     let tel = document.forms["myForm"]["tel"].value;
     let email = document.forms["myForm"]["email"].value;
     let reques = document.forms["myForm"]["request"].value
-    let req = new request (name, tel, email, reques);
+    let req = new Request (name, tel, email, reques);
     carrito.push(req);
     alert(name+tel+email+reques);
     const names = carrito.map((el) => el.name + ": " + el.price)
@@ -139,16 +140,15 @@ function showList(number){
  
     switch(number){
         case 1:
-
             let counter = document.getElementById("counterMini")
             let display = document.getElementById("sectionMini")
             let num = 0;
 
             carrito.forEach( (product)=> {
-                if (product.constructor.name == "miniature"){
+                if (product.constructor.name == "Miniature"){
                     num++
                     let legend = `Name: ${product.name} - Size: ${product.size} - Detail Level: ${product.detailLevel} - Price ${product.price} `
-                    let li = document.createElement("div")
+                    let li = document.createElement("p")
                     li.innerHTML = `<p class = "listMini">${legend}</p>`
                     display.appendChild(li)
                 }
@@ -169,7 +169,7 @@ function showList(number){
             let displayS = document.getElementById("sectionSet")
             let numS = 0;
             carrito.forEach( (product)=> {
-                if (product.constructor.name == "setting"){
+                if (product.constructor.name == "Setting"){
                    numS++
                    let legend = `Name: ${product.name} - Size: ${product.squares} - Detail Level: ${product.detailLevel} - Price ${product.price} `
                     let li = document.createElement("div")
@@ -186,21 +186,35 @@ function showList(number){
             }
        
              break;
+        
+        case 4:
+                
 
         }
 }
 
-function newMiniature{
+function newMiniature(){
     let name = document.forms["myFormMini"]["name"].value;
     let size = document.forms["myFormMini"]["size"].value;
-    let detailLevel = document.forms["myFormMini"]["detailLevel"].value;
+    let detailLevel = document.forms["myFormMini"]["detailLevel"].value.toLowerCase();
+   
+    if (name == "" || detailLevel == "" || size == ""){
+        alert("Must fill all fields")
+
+    }else if (detailLevel != "low" && detailLevel != "high"){
+        alert("Must choose between high or low detail level")
+    }else{ 
+        let mini = new Miniature (name, detailLevel, size);
+        mini.priceCalculator();
+        carrito.push(mini);
+        alert(name + size + detailLevel);
+        const names = carrito.map((el) => el.name + ": " + el.price)
+        document.getElementById("miniCart").innerHTML = names;
+        showList(1);
+        document.forms["myFormMini"]["name"].value = "";
+        document.forms["myFormMini"]["size"].value = "";
+        document.forms["myFormMini"]["detailLevel"].value = "";}
     
-    let Mini = new miniature (name, size, detailLevel);
-    carrito.push(mini);
-    alert(name + size + detailLevel);
-    const names = carrito.map((el) => el.name + ": " + el.price)
-    document.getElementById("miniCart").innerHTML = names;
-    document.forms["myFormMini"]["name"].value = "";
-    document.forms["myFormMini"]["size"].value = "";
-    document.forms["myFormMini"]["detailLevel"].value = "";
+  
 }
+

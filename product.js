@@ -1,4 +1,4 @@
-class miniature{
+class Miniature{
     constructor(name, detailLevel, size){
         this.name = name;
         this.detailLevel = detailLevel
@@ -20,7 +20,7 @@ class miniature{
   
 }
 
-class setting{
+class Setting{
     constructor(name, detailLevel, squares){
         this.name = name;
         this.detailLevel = detailLevel;
@@ -42,7 +42,7 @@ class setting{
     }
 }
 
-class request{
+class Request{
     constructor(name, tel, email, request){
         this.name = name;
         this.tel = tel;
