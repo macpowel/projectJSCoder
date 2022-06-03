@@ -104,15 +104,21 @@ function newRequest(){
     let tel = document.forms["myForm"]["tel"].value;
     let email = document.forms["myForm"]["email"].value;
     let reques = document.forms["myForm"]["request"].value
-    let req = new Request (name, tel, email, reques);
-    carrito.push(req);
-    alert(name+tel+email+reques);
-    const names = carrito.map((el) => el.name + ": " + el.price)
-    document.getElementById("miniCart").innerHTML = names;
-    document.forms["myForm"]["name"].value ="";
-    document.forms["myForm"]["tel"].value ="";
-    document.forms["myForm"]["email"].value ="";
-    document.forms["myForm"]["request"].value ="";
+    if(name ==""|| tel == ""|| email == "" || reques == ""){
+        alert("Must fill all fields")
+
+    }else{
+        let req = new Request (name, tel, email, reques);
+        carrito.push(req);
+        alert(name+tel+email+reques);
+        const names = carrito.map((el) => el.name + ": " + el.price)
+        document.getElementById("miniCart").innerHTML = names;
+        document.forms["myForm"]["name"].value ="";
+        document.forms["myForm"]["tel"].value ="";
+        document.forms["myForm"]["email"].value ="";
+        document.forms["myForm"]["request"].value ="";
+    }
+   
     
 }
 
@@ -141,7 +147,8 @@ function showList(number){
     switch(number){
         case 1:
             let counter = document.getElementById("counterMini")
-            let display = document.getElementById("sectionMini")
+            let display = document.getElementById("miniList")
+            display.innerHTML= "";
             let num = 0;
 
             carrito.forEach( (product)=> {
@@ -198,10 +205,9 @@ function newMiniature(){
     let size = document.forms["myFormMini"]["size"].value;
     let detailLevel = document.forms["myFormMini"]["detailLevel"].value.toLowerCase();
    
-    if (name == "" || detailLevel == "" || size == ""){
-        alert("Must fill all fields")
+   
 
-    }else if (detailLevel != "low" && detailLevel != "high"){
+    if (detailLevel != "low" && detailLevel != "high"){
         alert("Must choose between high or low detail level")
     }else{ 
         let mini = new Miniature (name, detailLevel, size);

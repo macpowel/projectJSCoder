@@ -8,8 +8,11 @@ buttonFilter.addEventListener("click", showSelected)
 buttonFilter.onmouseover = () => { buttonFilter.classList.toggle("buttonOver")}
 
 
-let buttonMini = document.getElementById("miniInput")
-buttonMini.addEventListener("click", newMiniature)
+let buttonMini = document.getElementById("myFormMini")
+buttonMini.addEventListener("submit", newMiniature)
+
+let buttoncito = document.getElementById("form")
+buttoncito.addEventListener("submit", newRequest)
             
 
 

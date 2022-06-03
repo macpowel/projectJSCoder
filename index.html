@@ -73,27 +73,25 @@
 
           <p>Convertimos tus ideas en realidad! Fabricamos miniaturas a pedido, dejanos el tuyo y nos contactaremos para realizarlas</p>
           
-         <form name="myFormMini" id="myFormMini"  >
+         <form name="myFormMini" id="myFormMini" onsubmit="return false" >
 
-            Name: <input type="text" name="name" placeholder="name">
+            Name: <input type="text" name="name" placeholder="name" required>
   
-            Size: <input type="number" name="size" placeholder="size">
+            Size: <input type="number" name="size" placeholder="size" required>
   
-            detailLevel: <input type="text" name="detailLevel" placeholder="detailLevel">
+            detailLevel: <input type="text" name="detailLevel" placeholder="detailLevel" required>
   
-            <input type="button" value="submit" id="miniInput">
+            <input type="submit" value="submit" id="miniInput">
             
             </form>
 
 
-          <p id = "counterMini"></p>
-          
-        
+          <p id = "counterMini" class="counterMini"></p>
+          <div id = "miniList" class="miniList"></div>
 
-        
         </section>
 
-        <section id="sectionSet">
+        <section id="sectionSet" class="secSet">
 
           <h3>Settings</h3>
 
@@ -149,30 +147,26 @@
     
       <section>
 
-        <h2>Contacto</h2>
+        <h2>Something unique?</h2>
+        
+        <form name="myForm" id="form"  onsubmit="return false">
 
-        <form name="myForm" id="form"  >
+          Name: <input type="text" name="name" placeholder="Name" required>
 
-          Name: <input type="text" name="name" placeholder="Name">
+          Tel: <input type ="tel" name="tel" placeholder="Tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
 
-          Tel: <input type="tel" name="tel" placeholder="Tel">
+          Email: <input type ="email" name="email" placeholder="Email" required>
 
-          Email: <input type="email" name="email" placeholder="Email">
+          Request <input type ="text" name="request" placeholder="Request" required>
 
-          Request <input type="text" name="request" placeholder="Request">
-
-          <input type="button" value="submit" id="dddd">
-
-          <script>let buttoncito = document.getElementById("dddd")
-          buttoncito.addEventListener("click", newRequest)
-
-          </script>
+          <input type ="submit" value="button" id="dddd">
           
           </form>
 
+          <div id="requestDiv"></div>
       </section>
     
-      <footer>
+      <footer class="footer">
 
         <p>Todos los derechos reservados</p>
 

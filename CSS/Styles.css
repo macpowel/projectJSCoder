@@ -104,9 +104,19 @@ body{
 }
 
 .listMini{
-    color: #0097a7; 
+    color: #0097a7;
+    background-color: #cfc ;
+    padding: 10px ;
+    border: 1px solid green ;
+    width: 200px;
+    height: 59px;
+    text-align: center;
+    
+
 }
 
+
 .counterMini{
-    color: #0097a7;  
+    color: #0097a7;
 }
+
