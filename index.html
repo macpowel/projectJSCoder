@@ -35,6 +35,18 @@
           id="buttonFilter"
           value="Filter"
          >
+         <input
+          class="buttonCart" 
+          type="button"
+          id="buttonSaveSession"
+          value="saveSession"
+         >
+         <input
+          class="buttonCart" 
+          type="button"
+          id="buttonGetSession"
+          value="getSession"
+         >
         
          
         </h1>
@@ -87,7 +99,7 @@
 
 
           <p id = "counterMini" class="counterMini"></p>
-          <div id = "miniList" class="miniList"></div>
+          <div id = "miniList" class="displayList" ></div>
 
         </section>
 
@@ -113,14 +125,22 @@
           </svg>
 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat dolore nemo ullam, distinctio possimus, iste dicta veniam exercitationem dolor quos recusandae. Magnam dolores dolor deleniti molestiae quibusdam earum alias beatae.</p>
-          <input 
-          type="button"
-          id="buttonSetting"
-          value="Comprar">
-      
+          
+          <form name="myFormSet" id="myFormSet" onsubmit="return false" >
+
+            Name: <input type="text" name="name" placeholder="name" required>
+  
+            Squares: <input type="number" name="squares" placeholder="squares" required>
+  
+            detailLevel: <input type="text" name="detailLevel" placeholder="detailLevel" required>
+  
+            <input type="submit" value="submit" id="setInput">
+            
+            </form>
 
 
           <p id = "counterSetting"></p>
+          <div id = "setList" class="displayList" ></div>
 
 
         </section>

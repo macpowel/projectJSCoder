@@ -107,11 +107,12 @@ body{
     color: #0097a7;
     background-color: #cfc ;
     padding: 10px ;
-    border: 1px solid green ;
-    width: 200px;
+    border: 5px solid white ;
+    width: 150px;
     height: 59px;
-    text-align: center;
+    text-align:center;
     
+   
 
 }
 
@@ -120,3 +121,7 @@ body{
     color: #0097a7;
 }
 
+.displayList{
+    display: flex;
+    flex-wrap: wrap;
+}

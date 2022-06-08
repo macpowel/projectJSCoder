@@ -129,6 +129,7 @@ function showCart(){
     const names = carrito.map((el) => el.constructor.name + ": " + el.name + ": " + el.price)
 
     alert("Su carrito: \n" + names.join("\n"));
+   
 }
 
 function showSelected(){
@@ -173,26 +174,28 @@ function showList(number){
         case 2:
 
             let counterS = document.getElementById("counterSetting")
-            let displayS = document.getElementById("sectionSet")
+            let displayS = document.getElementById("setList")
             let numS = 0;
+            displayS.innerHTML= "";
+
             carrito.forEach( (product)=> {
                 if (product.constructor.name == "Setting"){
-                   numS++
-                   let legend = `Name: ${product.name} - Size: ${product.squares} - Detail Level: ${product.detailLevel} - Price ${product.price} `
-                    let li = document.createElement("div")
-                    li.innerHTML = `<p class = "listSet">${legend}</p>`
+                    numS++
+                    let legend = `Name: ${product.name} - Squares: ${product.squares} - Detail Level: ${product.detailLevel} - Price ${product.price} `
+                    let li = document.createElement("p")
+                    li.innerHTML = `<p class = "listMini">${legend}</p>`
                     displayS.appendChild(li)
-                  
                 }
-               })
+                })
+            
             
             if (numS >0){
-               counterS.innerText = numS + " in cart ";
+                counterS.innerText = numS + " in cart ";
             }else{
-               counterS.innerText = "";
+                counterS.innerText = "";
             }
-       
-             break;
+
+            break;
         
         case 4:
                 
@@ -224,3 +227,58 @@ function newMiniature(){
   
 }
 
+function newSetting(){
+    let name = document.forms["myFormSet"]["name"].value;
+    let squares = document.forms["myFormSet"]["squares"].value;
+    let detailLevel = document.forms["myFormSet"]["detailLevel"].value.toLowerCase();
+   
+    if (detailLevel != "low" && detailLevel != "high"){
+        alert("Must choose between high or low detail level")
+    }else{ 
+        let set = new Setting (name, detailLevel, squares);
+        set.priceCalculator();
+        carrito.push(set);
+        alert ("Se ha agregado con exito");
+        const namesSet = carrito.map((el) => el.name + ": " + el.price)
+        document.getElementById("miniCart").innerHTML = namesSet;
+        showList(2);
+        document.forms["myFormSet"]["name"].value = "";
+        document.forms["myFormSet"]["squares"].value = "";
+        document.forms["myFormSet"]["detailLevel"].value = "";}
+}
+
+function saveCartSession(){
+    let saveArr = [];
+    sessionStorage.clear();
+    for(let i = 0; carrito.length > i; i++){
+        if (carrito[i].constructor.name == "Miniature"){
+            var arr = []
+            arr.push(carrito[i].constructor.name)
+            arr.push(carrito[i].name)
+            arr.push(carrito[i].detailLevel)
+            arr.push(carrito[i].size)
+            sessionStorage.setItem('cart'+[i],arr);
+        }
+        
+    }
+   
+    
+}
+
+function getCartSession(){
+
+    let keys = Object.keys(sessionStorage);
+    for(let key of keys) {
+        console.log(`${key}: ${sessionStorage.getItem(key)}`);
+        obj = sessionStorage.getItem(key).split(",").
+        console.log("hols soy" + obj)
+        console.log(obj[0])
+        
+        
+       
+      }
+
+
+    
+    
+}
