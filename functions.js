@@ -1,101 +1,22 @@
 carrito = [];
-var precioTotal = 0;
+let precioTotal = 0;
 
-function buyMiniature(){
-    //Paso a ser newMiniature por eventos
+//work in progress
+function delButton(){
+  if(carrito.length == 1){
+    let butDis = document.getElementById("buttonMain")
+    let li = document.createElement("button")
+    li.innerHTML = `<input
+    type="button"
+    id="buttonDelete"
+    value="Delete Last Added"
+    >`;
+    butDis.appendChild(li)
+    let buttonDel = document.getElementById("buttonDelete")
+    buttonDel.addEventListener("click", deleteLast)
+    buttonDel.onmouseover = () => { buttonDel.classList.toggle("buttonOver")}
     
-    let ask = parseInt(prompt("Ingrese accion: agregar miniatura use 1, quitar ultima miniatura use 2, finalizar use 3"))
-        while (ask != 3){
-            if (ask == 1){
-                
-                let askName = prompt("De que desea su miniatura?")
-                let askSize = prompt("De que tamaño la desea? en CM")
-                while (isNaN(askSize)){
-                    alert("input erroneo, pruebe de nuevo")
-                    askSize = prompt("De que tamaño la desea? en CM")
-                }
-                let askDetail = prompt("Que nivel de detalle desea? high or low??")
-                askDetail.toLowerCase();
-                while (askDetail != "high" && askDetail != "low"){
-                    alert("input erroneo, pruebe de nuevo")
-                    askDetail = prompt("Que nivel de detalle desea? high or low??").toLowerCase();
-                  
-                }
-                let mini = new Miniature (askName, askDetail, askSize);
-                mini.priceCalculator();
-                alert ("El precio seria" + mini.price)
-                carrito.push(mini);
-                alert ("Se ha agregado con exito");
-
-            
-                ask = parseInt(prompt("Ingrese accion: Agregar use 1, restar ultimo objeto use 2, finalizar use 3"))
-        
-            }else if ( ask == 2 && carrito.length > 0){
-                carrito.pop();
-                alert ("Se ha restado con exito")
-                
-                ask = parseInt(prompt("Ingrese accion: Agregar use 1, restar ultimo objeto use 2, finalizar use 3"))
-        
-            }else{
-                alert ("input erroneo, trate de nuevo")
-                ask = parseInt(prompt("Ingrese accion: Agregar use 1, restar ultimo objeto use 2, finalizar use 3"))
-            }
-        }
-     const names = carrito.map((el) => el.name + ": " + el.price)
-     document.getElementById("miniCart").innerHTML = names;
-
-     showList(1);
-
-    
-     
-}
-
-function buySetting(){
-    
-    let ask = parseInt(prompt("Ingrese accion: agregar Setting use 1, quitar ultimo Setting use 2, finalizar use 3"))
-        while (ask != 3){
-            if (ask == 1){
-                
-                let askName = prompt("De que desea su setting?")
-                let askSquares = prompt("De que tamaño la desea? por cuadrado (5 pies)")
-                while (isNaN(askSquares)){
-                    alert("input erroneo, pruebe de nuevo")
-                    askSquares = prompt("De que tamaño la desea? por cuadrado (5 pies)")
-                }
-                let askDetail = prompt("Que nivel de detalle desea? high or low??")
-                askDetail.toLowerCase();
-                while (askDetail != "high" && askDetail != "low"){
-                    alert("input erroneo, pruebe de nuevo")
-                    askDetail = prompt("Que nivel de detalle desea? high or low??").toLowerCase();
-                  
-                }
-                let set = new Setting (askName, askDetail, askSquares);
-                set.priceCalculator();
-                alert ("El precio seria" + set.price)
-                carrito.push(set);
-                alert ("Se ha agregado con exito");
-
-            
-                ask = parseInt(prompt("Ingrese accion: Agregar use 1, restar ultimo objeto use 2, finalizar use 3"))
-        
-            }else if ( ask == 2 && carrito.length > 0){
-                carrito.pop();
-                alert ("Se ha restado con exito")
-                
-                ask = parseInt(prompt("Ingrese accion: Agregar use 1, restar ultimo objeto use 2, finalizar use 3"))
-        
-            }else{
-                alert ("input erroneo, trate de nuevo")
-                ask = parseInt(prompt("Ingrese accion: Agregar use 1, restar ultimo objeto use 2, finalizar use 3"))
-            }
-        }
-
-     const names = carrito.map((el) => el.name + ": " + el.price)
-     document.getElementById("miniCart").innerHTML = names;
-     
-     showList(2);
-
-     
+  }
 }
 
 function newRequest(){
@@ -104,103 +25,95 @@ function newRequest(){
     let tel = document.forms["myForm"]["tel"].value;
     let email = document.forms["myForm"]["email"].value;
     let reques = document.forms["myForm"]["request"].value
-    if(name ==""|| tel == ""|| email == "" || reques == ""){
-        alert("Must fill all fields")
-
-    }else{
+    
         let req = new Request (name, tel, email, reques);
         carrito.push(req);
-        alert(name+tel+email+reques);
         const names = carrito.map((el) => el.name + ": " + el.price)
         document.getElementById("miniCart").innerHTML = names;
         document.forms["myForm"]["name"].value ="";
         document.forms["myForm"]["tel"].value ="";
         document.forms["myForm"]["email"].value ="";
         document.forms["myForm"]["request"].value ="";
-    }
+        saveCartSession();
+        showList();
    
     
 }
 
-function showCart(){
-    //let holder = [];
-    //for (let i = 0; i<carrito.length; i++){(holder.push(carrito[i].name))}
-    //alert("Su carrito tiene:\n " + holder.join(", "));
-    const names = carrito.map((el) => el.constructor.name + ": " + el.name + ": " + el.price)
-
-    alert("Su carrito: \n" + names.join("\n"));
-   
-}
-
-function showSelected(){
-    let askType = prompt("Que tipo desea ver en su carrito?").toLowerCase();
-    while (askType != "setting" && askType != "miniature"){
-        alert("input erroneo, pruebe de nuevo");
-        askType = prompt("Que tipo desea ver en su carrito?").toLowerCase()
-    }
-    const type = carrito.filter((el) => el.constructor.name == askType)
-    const car = type.map((el) => el.constructor.name + ": " + el.name + ": " + el.price)
-    alert("Su carrito: \n" + car.join("\n"));
-}
-
-function showList(number){
- 
-    switch(number){
-        case 1:
-            let counter = document.getElementById("counterMini")
-            let display = document.getElementById("miniList")
-            display.innerHTML= "";
-            let num = 0;
-
-            carrito.forEach( (product)=> {
-                if (product.constructor.name == "Miniature"){
-                    num++
-                    let legend = `Name: ${product.name} - Size: ${product.size} - Detail Level: ${product.detailLevel} - Price ${product.price} `
-                    let li = document.createElement("p")
-                    li.innerHTML = `<p class = "listMini">${legend}</p>`
-                    display.appendChild(li)
-                }
-                })
-            
-            
-            if (num >0){
-                counter.innerText = num + " in cart ";
-            }else{
-                counter.innerText = "";
-            }
-
-            break;
-
-        case 2:
-
-            let counterS = document.getElementById("counterSetting")
-            let displayS = document.getElementById("setList")
-            let numS = 0;
-            displayS.innerHTML= "";
-
-            carrito.forEach( (product)=> {
-                if (product.constructor.name == "Setting"){
-                    numS++
-                    let legend = `Name: ${product.name} - Squares: ${product.squares} - Detail Level: ${product.detailLevel} - Price ${product.price} `
-                    let li = document.createElement("p")
-                    li.innerHTML = `<p class = "listMini">${legend}</p>`
-                    displayS.appendChild(li)
-                }
-                })
-            
-            
-            if (numS >0){
-                counterS.innerText = numS + " in cart ";
-            }else{
-                counterS.innerText = "";
-            }
-
-            break;
-        
-        case 4:
-                
-
+function priceTotal(){
+    let total = 0;
+    carrito.forEach((product)=>{
+        if(product.constructor.name != "Request"){
+             total = total + product.price
         }
+    }
+    )
+   let precTot = document.getElementById("priceTotal")
+   precTot.innerHTML= `<div >${total}</div>`;
+
+}
+function showList(){
+
+    let counter = document.getElementById("counterMini")
+    let display = document.getElementById("miniList")
+    display.innerHTML= "";
+    let num = 0;
+
+    carrito.forEach( (product)=> {
+        if (product.constructor.name == "Miniature"){
+            num++
+            const{name, size, detailLevel, price } = product;
+            let legend = `Name: ${name} - Size: ${size} - Detail Level: ${detailLevel} - Price ${price} `
+            let li = document.createElement("p")
+            li.innerHTML = `<p class = "listMini">${legend}</p>`
+            display.appendChild(li)
+        }
+        })
+    
+    
+    num >0 ?  counter.innerText = num + " in cart " :   counter.innerText = "Minis in cart: 0";
+
+
+    let counterS = document.getElementById("counterSetting")
+    let displayS = document.getElementById("setList")
+    let numS = 0;
+    displayS.innerHTML= "";
+
+    carrito.forEach( (product)=> {
+        if (product.constructor.name == "Setting"){
+            numS++
+            const{name, squares, detailLevel, price } = product;
+            let legend = `Name: ${name} - Squares: ${squares} - Detail Level: ${detailLevel} - Price ${price} `
+            let li = document.createElement("p")
+            li.innerHTML = `<p class = "listMini">${legend}</p>`
+            displayS.appendChild(li)
+        }
+        })
+    
+    
+    numS >0 ?  counterS.innerText = numS + " in cart " :   counterS.innerText = "Setting in cart: 0";
+
+
+    let counterR = document.getElementById("counterReq")
+    let displayR = document.getElementById("reqList")
+    let numR = 0;
+    displayR.innerHTML= "";
+
+    carrito.forEach( (product)=> {
+        if (product.constructor.name == "Request"){
+            numR++
+            const{name, tel, email, request, price } = product;
+            let legend = `Name: ${name}\n- Tel: ${tel}\n - email: ${email}\n - request ${request}\n - price ${price}`
+            let li = document.createElement("p")
+            li.innerHTML = `<p class = "listReq">${legend}</p>`
+            displayR.appendChild(li)
+        }
+        })
+    
+    numR>0 ?  counterR.innerText = numR + " in cart " :   counterR.innerText = "Requests in cart : 0";
+    priceTotal()
+
+
 }
 
 function newMiniature(){
@@ -210,21 +123,31 @@ function newMiniature(){
    
    
 
-    if (detailLevel != "low" && detailLevel != "high"){
-        alert("Must choose between high or low detail level")
+    if (detailLevel != "low" && detailLevel != "high" || carrito.filter((obj) => obj.name === name).length){
     }else{ 
         let mini = new Miniature (name, detailLevel, size);
         mini.priceCalculator();
         carrito.push(mini);
-        alert(name + size + detailLevel);
         const names = carrito.map((el) => el.name + ": " + el.price)
-        document.getElementById("miniCart").innerHTML = names;
-        showList(1);
+        document.getElementById("miniCart").innerHTML = "Cart: "+names;
+        showList();
         document.forms["myFormMini"]["name"].value = "";
         document.forms["myFormMini"]["size"].value = "";
         document.forms["myFormMini"]["detailLevel"].value = "";}
-    
+        priceTotal();
+        saveCartSession();
   
+}
+
+
+function deleteLast(){
+    carrito.pop();
+    saveCartSession();
+    showList()
+
+    const names = carrito.map((el) => el.name + ": " + el.price)
+    carrito.length == 0 ?  document.getElementById("miniCart").innerHTML = "Empty Cart" : document.getElementById("miniCart").innerHTML = names; ;
+
 }
 
 function newSetting(){
@@ -233,52 +156,67 @@ function newSetting(){
     let detailLevel = document.forms["myFormSet"]["detailLevel"].value.toLowerCase();
    
     if (detailLevel != "low" && detailLevel != "high"){
-        alert("Must choose between high or low detail level")
     }else{ 
         let set = new Setting (name, detailLevel, squares);
         set.priceCalculator();
         carrito.push(set);
-        alert ("Se ha agregado con exito");
         const namesSet = carrito.map((el) => el.name + ": " + el.price)
         document.getElementById("miniCart").innerHTML = namesSet;
-        showList(2);
+        showList();
         document.forms["myFormSet"]["name"].value = "";
         document.forms["myFormSet"]["squares"].value = "";
         document.forms["myFormSet"]["detailLevel"].value = "";}
+        saveCartSession();
 }
 
 function saveCartSession(){
-    let saveArr = [];
     sessionStorage.clear();
+    const saveSession = (key, value) => {sessionStorage.setItem(key, value)};
     for(let i = 0; carrito.length > i; i++){
-        if (carrito[i].constructor.name == "Miniature"){
-            var arr = []
-            arr.push(carrito[i].constructor.name)
-            arr.push(carrito[i].name)
-            arr.push(carrito[i].detailLevel)
-            arr.push(carrito[i].size)
-            sessionStorage.setItem('cart'+[i],arr);
+            saveSession(carrito[i].constructor.name + i, JSON.stringify(carrito[i]));
         }
-        
-    }
+    
+   
+
    
     
 }
 
 function getCartSession(){
-
-    let keys = Object.keys(sessionStorage);
+    carrito = [];
+    let keys = Object.keys(sessionStorage)
+    
     for(let key of keys) {
-        console.log(`${key}: ${sessionStorage.getItem(key)}`);
-        obj = sessionStorage.getItem(key).split(",").
-        console.log("hols soy" + obj)
-        console.log(obj[0])
-        
-        
+        let firstC = key.charAt(0);
+        let stored = JSON.parse(sessionStorage.getItem(key))
+        if(firstC == "S"){
+           let set = new Setting (stored["name"], stored["detailLevel"], stored["squares"])
+           carrito.push(set)
+           showList(1);
+           showList(2);
+           showList(3);
+           const names = carrito.map((el) => el.name + ": " + el.price)
+           document.getElementById("miniCart").innerHTML = names;
+   
+        }
+        if(firstC == "M"){
+           
+            let set = new Miniature (stored["name"], stored["detailLevel"], stored["size"])
+            console.log(set.detailLevel)
+            carrito.push(set)
+            showList()
+            const names = carrito.map((el) => el.name + ": " + el.price)
+            document.getElementById("miniCart").innerHTML = names;
+    
+         }
+         if(firstC == "R"){
+            let req = new Request (stored["name"], stored["tel"], stored["email"], stored["request"])
+            carrito.push(req)
+            showList()
+            const names = carrito.map((el) => el.name + ": " + el.price)
+            document.getElementById("miniCart").innerHTML = names;
+
+         }
        
-      }
-
-
-    
-    
+}
 }

@@ -1,18 +1,10 @@
-let buttonCart = document.getElementById("buttonCart")
-buttonCart.addEventListener("click", showCart)
-buttonCart.onmouseover = () => { buttonCart.classList.toggle("buttonOver")}
 
-
-let buttonFilter = document.getElementById("buttonFilter")
-buttonFilter.addEventListener("click", showSelected)
-buttonFilter.onmouseover = () => { buttonFilter.classList.toggle("buttonOver")}
-
-let buttonSaveSession = document.getElementById("buttonSaveSession")
-buttonSaveSession.addEventListener("click", saveCartSession)
+let buttonDel = document.getElementById("buttonDelete")
+buttonDel.addEventListener("click", deleteLast)
+buttonDel.onmouseover = () => { buttonDel.classList.toggle("buttonOver")}
 
 let buttonGetSession = document.getElementById("buttonGetSession")
 buttonGetSession.addEventListener("click", getCartSession)
-
 
 let buttonMini = document.getElementById("myFormMini")
 buttonMini.addEventListener("submit", newMiniature)

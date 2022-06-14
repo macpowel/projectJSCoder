@@ -26,31 +26,19 @@
           <input
           class="buttonCart" 
           type="button"
-          id="buttonCart"
-          value="Cart"
+          id="buttonDelete"
+          value="Delete Last Added"
           >
           <input
           class="buttonCart" 
           type="button"
-          id="buttonFilter"
-          value="Filter"
-         >
-         <input
-          class="buttonCart" 
-          type="button"
-          id="buttonSaveSession"
-          value="saveSession"
-         >
-         <input
-          class="buttonCart" 
-          type="button"
           id="buttonGetSession"
           value="getSession"
-         >
-        
-         
+        >
+       
         </h1>
-        <span id="miniCart" class="miniCart"></span>
+        <span id="miniCart" class="miniCart">Cart</span>
+        <div id="priceTotal">Precio Total: 0</div>
        
 
       </header>
@@ -85,20 +73,18 @@
 
           <p>Convertimos tus ideas en realidad! Fabricamos miniaturas a pedido, dejanos el tuyo y nos contactaremos para realizarlas</p>
           
-         <form name="myFormMini" id="myFormMini" onsubmit="return false" >
+         <form name="myFormMini" id="myFormMini" class="myFormMini" onsubmit="return false" >
 
             Name: <input type="text" name="name" placeholder="name" required>
   
             Size: <input type="number" name="size" placeholder="size" required>
   
-            detailLevel: <input type="text" name="detailLevel" placeholder="detailLevel" required>
+            detailLevel: <input type="text" name="detailLevel" placeholder="high or low" required>
   
             <input type="submit" value="submit" id="miniInput">
             
             </form>
-
-
-          <p id = "counterMini" class="counterMini"></p>
+          <p id = "counterMini" class="counterMini">Minis in cart : 0</p>
           <div id = "miniList" class="displayList" ></div>
 
         </section>
@@ -126,41 +112,24 @@
 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat dolore nemo ullam, distinctio possimus, iste dicta veniam exercitationem dolor quos recusandae. Magnam dolores dolor deleniti molestiae quibusdam earum alias beatae.</p>
           
-          <form name="myFormSet" id="myFormSet" onsubmit="return false" >
+          <form name="myFormSet" id="myFormSet" class="myFormMini" onsubmit="return false" >
 
             Name: <input type="text" name="name" placeholder="name" required>
   
             Squares: <input type="number" name="squares" placeholder="squares" required>
   
-            detailLevel: <input type="text" name="detailLevel" placeholder="detailLevel" required>
+            detailLevel: <input type="text" name="detailLevel" placeholder="high or low" required>
   
             <input type="submit" value="submit" id="setInput">
             
             </form>
 
 
-          <p id = "counterSetting"></p>
+          <p id = "counterSetting" class="counterMini">Setting in cart: 0</p>
           <div id = "setList" class="displayList" ></div>
 
 
         </section>
-
-        <section>
-
-          <h3>Dados</h3>
-
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-credit-card" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <rect x="3" y="5" width="18" height="14" rx="3" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-            <line x1="7" y1="15" x2="7.01" y2="15" />
-            <line x1="11" y1="15" x2="13" y2="15" />
-          </svg>
-
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat dolore nemo ullam, distinctio possimus, iste dicta veniam exercitationem dolor quos recusandae. Magnam dolores dolor deleniti molestiae quibusdam earum alias beatae.</p>
-
-        </section>
-
 
       </main>
 
@@ -169,7 +138,7 @@
 
         <h2>Something unique?</h2>
         
-        <form name="myForm" id="form"  onsubmit="return false">
+        <form name="myForm" id="form" class="myFormMini" onsubmit="return false">
 
           Name: <input type="text" name="name" placeholder="Name" required>
 
@@ -182,6 +151,9 @@
           <input type ="submit" value="button" id="dddd">
           
           </form>
+          
+          <p id = "counterReq" class="counterMini">Requests in cart: 0</p>
+          <div id = "reqList" class="displayList" ></div>
 
           <div id="requestDiv"></div>
       </section>
