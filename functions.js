@@ -1,4 +1,4 @@
-carrito = [];
+ carrito = [];
 let precioTotal = 0;
 
 //work in progress
@@ -36,8 +36,19 @@ function newRequest(){
         document.forms["myForm"]["request"].value ="";
         saveCartSession();
         showList();
+        toast( "Added request")
    
     
+}
+
+function toast(kind){
+    
+    Toastify({
+        text: kind,
+        duration: 3000,
+        gravity: 'bottom',
+        position: 'right'
+    }).showToast();
 }
 
 function priceTotal(){
@@ -136,18 +147,22 @@ function newMiniature(){
         document.forms["myFormMini"]["detailLevel"].value = "";}
         priceTotal();
         saveCartSession();
+        toast( "Added Miniature")
   
 }
 
 
 function deleteLast(){
+    if(carrito.length > 0){
+        toast( "Removed from Cart")
+    }
     carrito.pop();
     saveCartSession();
     showList()
 
     const names = carrito.map((el) => el.name + ": " + el.price)
     carrito.length == 0 ?  document.getElementById("miniCart").innerHTML = "Empty Cart" : document.getElementById("miniCart").innerHTML = names; ;
-
+   
 }
 
 function newSetting(){
@@ -167,6 +182,7 @@ function newSetting(){
         document.forms["myFormSet"]["squares"].value = "";
         document.forms["myFormSet"]["detailLevel"].value = "";}
         saveCartSession();
+        toast( "Added Setting")
 }
 
 function saveCartSession(){
@@ -175,6 +191,7 @@ function saveCartSession(){
     for(let i = 0; carrito.length > i; i++){
             saveSession(carrito[i].constructor.name + i, JSON.stringify(carrito[i]));
         }
+    
     
    
 
@@ -218,5 +235,6 @@ function getCartSession(){
 
          }
        
-}
+    }
+    toast( "Reload successful")
 }
