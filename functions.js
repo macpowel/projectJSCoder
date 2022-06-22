@@ -1,4 +1,4 @@
- carrito = [];
+carrito = [];
 let precioTotal = 0;
 
 //work in progress
@@ -19,48 +19,38 @@ function delButton(){
   }
 }
 
-function newRequest(){
+function newOrder(){
     
     let name = document.forms["myForm"]["name"].value;
     let tel = document.forms["myForm"]["tel"].value;
     let email = document.forms["myForm"]["email"].value;
-    let reques = document.forms["myForm"]["request"].value
+    let reques = document.forms["myForm"]["order"].value
     
-        let req = new Request (name, tel, email, reques);
+        let req = new Order (name, tel, email, reques);
         carrito.push(req);
         const names = carrito.map((el) => el.name + ": " + el.price)
         document.getElementById("miniCart").innerHTML = names;
         document.forms["myForm"]["name"].value ="";
         document.forms["myForm"]["tel"].value ="";
         document.forms["myForm"]["email"].value ="";
-        document.forms["myForm"]["request"].value ="";
+        document.forms["myForm"]["order"].value ="";
         saveCartSession();
         showList();
-        toast( "Added request")
+        toast("added Order")
    
     
-}
-
-function toast(kind){
-    
-    Toastify({
-        text: kind,
-        duration: 3000,
-        gravity: 'bottom',
-        position: 'right'
-    }).showToast();
 }
 
 function priceTotal(){
     let total = 0;
     carrito.forEach((product)=>{
-        if(product.constructor.name != "Request"){
+        if(product.constructor.name != "Order"){
              total = total + product.price
         }
     }
     )
    let precTot = document.getElementById("priceTotal")
-   precTot.innerHTML= `<div >${total}</div>`;
+   precTot.innerHTML= `<div >total: ${total}</div>`;
 
 }
 function showList(){
@@ -111,20 +101,24 @@ function showList(){
     displayR.innerHTML= "";
 
     carrito.forEach( (product)=> {
-        if (product.constructor.name == "Request"){
+        if (product.constructor.name == "Order"){
             numR++
-            const{name, tel, email, request, price } = product;
-            let legend = `Name: ${name}\n- Tel: ${tel}\n - email: ${email}\n - request ${request}\n - price ${price}`
+            const{name, tel, email, order, price } = product;
+            let legend = `Name: ${name}\n- Tel: ${tel}\n - email: ${email}\n - order ${order}\n - price ${price}`
             let li = document.createElement("p")
             li.innerHTML = `<p class = "listReq">${legend}</p>`
             displayR.appendChild(li)
         }
         })
     
-    numR>0 ?  counterR.innerText = numR + " in cart " :   counterR.innerText = "Requests in cart : 0";
+    numR>0 ?  counterR.innerText = numR + " in cart " :   counterR.innerText = "Orders in cart : 0";
     priceTotal()
 
 
+}
+
+function test(){
+    alert("hello");
 }
 
 function newMiniature(){
@@ -144,10 +138,11 @@ function newMiniature(){
         showList();
         document.forms["myFormMini"]["name"].value = "";
         document.forms["myFormMini"]["size"].value = "";
-        document.forms["myFormMini"]["detailLevel"].value = "";}
+        document.forms["myFormMini"]["detailLevel"].value = "";
+        toast( "added to cart")}
         priceTotal();
         saveCartSession();
-        toast( "Added Miniature")
+       
   
 }
 
@@ -162,7 +157,7 @@ function deleteLast(){
 
     const names = carrito.map((el) => el.name + ": " + el.price)
     carrito.length == 0 ?  document.getElementById("miniCart").innerHTML = "Empty Cart" : document.getElementById("miniCart").innerHTML = names; ;
-   
+
 }
 
 function newSetting(){
@@ -170,7 +165,7 @@ function newSetting(){
     let squares = document.forms["myFormSet"]["squares"].value;
     let detailLevel = document.forms["myFormSet"]["detailLevel"].value.toLowerCase();
    
-    if (detailLevel != "low" && detailLevel != "high"){
+    if (detailLevel != "low" && detailLevel != "high"|| carrito.filter((obj) => obj.name === name).length){
     }else{ 
         let set = new Setting (name, detailLevel, squares);
         set.priceCalculator();
@@ -180,10 +175,14 @@ function newSetting(){
         showList();
         document.forms["myFormSet"]["name"].value = "";
         document.forms["myFormSet"]["squares"].value = "";
-        document.forms["myFormSet"]["detailLevel"].value = "";}
+        document.forms["myFormSet"]["detailLevel"].value = "";
+        toast("setting addec to cart")}
         saveCartSession();
-        toast( "Added Setting")
+        priceTotal();
+    
 }
+
+
 
 function saveCartSession(){
     sessionStorage.clear();
@@ -192,11 +191,21 @@ function saveCartSession(){
             saveSession(carrito[i].constructor.name + i, JSON.stringify(carrito[i]));
         }
     
-    
    
 
    
     
+}
+
+
+function toast(kind){
+    
+    Toastify({
+        text: kind,
+        duration: 3000,
+        gravity: 'bottom',
+        position: 'right'
+    }).showToast();
 }
 
 function getCartSession(){
@@ -209,9 +218,7 @@ function getCartSession(){
         if(firstC == "S"){
            let set = new Setting (stored["name"], stored["detailLevel"], stored["squares"])
            carrito.push(set)
-           showList(1);
-           showList(2);
-           showList(3);
+           showList()
            const names = carrito.map((el) => el.name + ": " + el.price)
            document.getElementById("miniCart").innerHTML = names;
    
@@ -226,8 +233,8 @@ function getCartSession(){
             document.getElementById("miniCart").innerHTML = names;
     
          }
-         if(firstC == "R"){
-            let req = new Request (stored["name"], stored["tel"], stored["email"], stored["request"])
+         if(firstC == "O"){
+            let req = new Order (stored["name"], stored["tel"], stored["email"], stored["Order"])
             carrito.push(req)
             showList()
             const names = carrito.map((el) => el.name + ": " + el.price)
@@ -235,6 +242,6 @@ function getCartSession(){
 
          }
        
-    }
-    toast( "Reload successful")
+}
+    toast("retrieved succesfully")
 }

@@ -42,12 +42,12 @@ class Setting{
     }
 }
 
-class Request{
-    constructor(name, tel, email, request){
+class Order{
+    constructor(name, tel, email, order){
         this.name = name;
         this.tel = tel;
         this.email = email;
-        this.request = request;
+        this.order = order;
         this.price = "price to be seen";
     }
 }
